@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "IBM Plex Sans", ui-sans-serif, system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, SFMono-Regular, monospace;
+  
+  --color-carbon-blue-60: #0f62fe;
+  --color-carbon-blue-70: #0043ce;
+  --color-carbon-gray-10: #f4f4f4;
+  --color-carbon-gray-20: #e0e0e0;
+  --color-carbon-gray-80: #393939;
+  --color-carbon-gray-90: #262626;
+  --color-carbon-gray-100: #161616;
+}
+
+@layer base {
+  body {
+    @apply font-sans antialiased bg-white text-[#161616];
+  }
+  
+  /* Carbon Design System typically uses sharp corners */
+  * {
+    @apply rounded-none!;
+  }
+}
+
+@layer components {
+  .carbon-btn-primary {
+    @apply bg-carbon-blue-60 text-white px-4 py-2 text-sm font-normal hover:bg-carbon-blue-70 transition-colors flex items-center gap-2;
+  }
+  
+  .carbon-btn-ghost {
+    @apply text-carbon-blue-60 px-4 py-2 text-sm font-normal hover:bg-carbon-gray-10 transition-colors flex items-center gap-2;
+  }
+  
+  .carbon-btn-secondary {
+    @apply bg-carbon-gray-80 text-white px-4 py-2 text-sm font-normal hover:bg-carbon-gray-90 transition-colors flex items-center gap-2;
+  }
+}

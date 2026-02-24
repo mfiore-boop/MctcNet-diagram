@@ -1,0 +1,5 @@
+{
+  "name": "MCTC Net2 Configurator v3",
+  "description": "Applicazione per la gestione, visualizzazione e reportistica delle attrezzature MCTC Net2 da file .rev e .sav.",
+  "requestFramePermissions": []
+}
