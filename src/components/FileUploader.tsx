@@ -30,24 +30,24 @@ export function FileUploader({ onFileUpload, isLoading, className }: FileUploade
     <div
       {...getRootProps()}
       className={cn(
-        "border border-dashed p-12 transition-all duration-200 cursor-pointer flex flex-col items-center justify-center text-center gap-6",
-        isDragActive ? "border-carbon-blue-60 bg-carbon-gray-10" : "border-carbon-gray-20 bg-carbon-gray-10 hover:bg-carbon-gray-20",
+        "border-2 border-dashed p-16 transition-all duration-200 cursor-pointer flex flex-col items-center justify-center text-center gap-6 min-h-[320px]",
+        isDragActive ? "border-carbon-blue-60 bg-carbon-blue-60/5" : "border-carbon-gray-20 bg-carbon-gray-10 hover:bg-carbon-gray-20 hover:border-carbon-gray-80",
         isDragReject && "border-red-500 bg-red-50",
         className
       )}
     >
       <input {...getInputProps()} />
       <div className={cn(
-        "w-12 h-12 flex items-center justify-center",
-        isDragActive ? "text-carbon-blue-60" : "text-carbon-gray-80"
+        "w-16 h-16 flex items-center justify-center rounded-full mb-2 transition-colors",
+        isDragActive ? "bg-carbon-blue-60 text-white" : "bg-white text-carbon-gray-80 shadow-sm"
       )}>
         {isDragReject ? <AlertCircle className="w-8 h-8 text-red-500" /> : <Upload className="w-8 h-8" />}
       </div>
       <div>
-        <h3 className="text-sm font-bold uppercase tracking-widest text-carbon-gray-100">
-          {isDragActive ? "Rilascia il file qui" : "Carica file configurazione"}
+        <h3 className="text-lg font-medium text-carbon-gray-100 mb-2">
+          {isDragActive ? "Rilascia il file qui" : "Carica file di configurazione"}
         </h3>
-        <p className="text-xs text-carbon-gray-80 mt-2 max-w-xs mx-auto font-light">
+        <p className="text-sm text-carbon-gray-80 max-w-sm mx-auto font-light leading-relaxed">
           Trascina qui il file .rev, .sav o .json, oppure clicca per selezionarlo dal computer.
         </p>
       </div>

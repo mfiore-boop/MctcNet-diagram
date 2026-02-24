@@ -206,76 +206,87 @@ function App() {
 
         <div className="p-8 flex-1">
           {viewMode === 'dashboard' && (
-            <div className="max-w-4xl mx-auto mt-12">
-              <div className="mb-12">
-                <h2 className="text-3xl font-light text-carbon-gray-100 mb-2">Benvenuto in Net2 Configurator</h2>
-                <p className="text-carbon-gray-80 font-light">Importa i file .rev, .sav o .json per generare il diagramma tecnico della rete MCTC Net2.</p>
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-                <div className="md:col-span-2">
-                  <FileUploader onFileUpload={handleFileUpload} isLoading={isLoading} />
+            <div className="max-w-7xl mx-auto mt-8">
+              <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
+                {/* Left Column - Main Action */}
+                <div className="lg:col-span-8 space-y-8">
+                  <div>
+                    <h2 className="text-5xl font-light text-carbon-gray-100 mb-4 tracking-tight">
+                      Net2 Configurator
+                    </h2>
+                    <p className="text-lg text-carbon-gray-80 font-light max-w-2xl leading-relaxed">
+                      Importa i file <span className="font-mono text-sm bg-carbon-gray-10 px-1 py-0.5">.rev</span>, <span className="font-mono text-sm bg-carbon-gray-10 px-1 py-0.5">.sav</span> o <span className="font-mono text-sm bg-carbon-gray-10 px-1 py-0.5">.json</span> per generare e analizzare il diagramma tecnico della rete MCTC Net2.
+                    </p>
+                  </div>
+                  
+                  <div className="bg-white border border-carbon-gray-20 shadow-sm">
+                    <FileUploader onFileUpload={handleFileUpload} isLoading={isLoading} />
+                  </div>
+                  
+                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                     <div className="p-6 border border-carbon-gray-20 bg-carbon-gray-10 hover:bg-carbon-gray-20 transition-colors cursor-pointer group" onClick={() => { setEquipment([]); setViewMode('diagram'); }}>
+                        <h3 className="text-sm font-bold uppercase tracking-widest mb-2 group-hover:text-carbon-blue-60 transition-colors">Crea Manualmente</h3>
+                        <p className="text-xs text-carbon-gray-80 leading-relaxed">Inizia da un foglio bianco e aggiungi i dispositivi uno ad uno.</p>
+                     </div>
+                     <div className="p-6 border border-carbon-gray-20 bg-carbon-gray-10 hover:bg-carbon-gray-20 transition-colors cursor-pointer group" onClick={loadDemoData}>
+                        <h3 className="text-sm font-bold uppercase tracking-widest mb-2 group-hover:text-carbon-blue-60 transition-colors">Carica Demo</h3>
+                        <p className="text-xs text-carbon-gray-80 leading-relaxed">Esplora le funzionalità con un set di dati preconfigurato.</p>
+                     </div>
+                  </div>
                 </div>
                 
-                <div className="space-y-4">
-                  <div className="p-6 bg-carbon-gray-10 border border-carbon-gray-20">
-                    <h3 className="text-sm font-bold uppercase tracking-widest mb-4">Nuova Configurazione</h3>
-                    <div className="space-y-2">
+                {/* Right Column - Templates & Info */}
+                <div className="lg:col-span-4 space-y-6">
+                  <div className="p-8 bg-carbon-gray-100 text-white relative overflow-hidden">
+                    <div className="absolute -right-12 -top-12 w-40 h-40 bg-carbon-blue-60 rounded-full opacity-20 blur-3xl"></div>
+                    <h3 className="text-sm font-bold uppercase tracking-widest mb-6 text-carbon-gray-20">Modelli Predefiniti</h3>
+                    <div className="space-y-3 relative z-10">
                       <button
                         onClick={() => {
                           setEquipment(generateAutoLine());
                           setViewMode('diagram');
                         }}
-                        className="w-full carbon-btn-primary justify-center text-xs"
+                        className="w-full text-left p-4 border border-carbon-gray-80 hover:border-carbon-blue-60 hover:bg-carbon-gray-90 transition-all group flex items-center justify-between"
                       >
-                        Linea Auto
+                        <div>
+                          <div className="font-medium text-sm mb-1 group-hover:text-carbon-blue-60 transition-colors">Linea Auto</div>
+                          <div className="text-xs text-carbon-gray-20 opacity-70">Configurazione standard per autoveicoli</div>
+                        </div>
+                        <Network size={16} className="text-carbon-gray-20 group-hover:text-carbon-blue-60 transition-colors" />
                       </button>
                       <button
                         onClick={() => {
                           setEquipment(generateAutoMotoLine());
                           setViewMode('diagram');
                         }}
-                        className="w-full carbon-btn-primary justify-center text-xs"
+                        className="w-full text-left p-4 border border-carbon-gray-80 hover:border-carbon-blue-60 hover:bg-carbon-gray-90 transition-all group flex items-center justify-between"
                       >
-                        Linea Auto e Moto
+                        <div>
+                          <div className="font-medium text-sm mb-1 group-hover:text-carbon-blue-60 transition-colors">Linea Auto e Moto</div>
+                          <div className="text-xs text-carbon-gray-20 opacity-70">Configurazione mista a due ponti</div>
+                        </div>
+                        <Network size={16} className="text-carbon-gray-20 group-hover:text-carbon-blue-60 transition-colors" />
                       </button>
                       <button
                         onClick={() => {
                           setEquipment(generateAutoMoto34Line());
                           setViewMode('diagram');
                         }}
-                        className="w-full carbon-btn-primary justify-center text-xs"
+                        className="w-full text-left p-4 border border-carbon-gray-80 hover:border-carbon-blue-60 hover:bg-carbon-gray-90 transition-all group flex items-center justify-between"
                       >
-                        Linea Auto-Moto-3/4 Ruote
-                      </button>
-                    </div>
-                  </div>
-
-                  <div className="p-6 bg-carbon-gray-10 border border-carbon-gray-20">
-                    <h3 className="text-sm font-bold uppercase tracking-widest mb-4">Azioni Rapide</h3>
-                    <div className="space-y-2">
-                      <button
-                        onClick={() => {
-                          setEquipment([]);
-                          setViewMode('diagram');
-                        }}
-                        className="w-full carbon-btn-secondary justify-center"
-                      >
-                        Crea Manualmente
-                      </button>
-                      <button
-                        onClick={loadDemoData}
-                        className="w-full carbon-btn-ghost justify-center"
-                      >
-                        Carica Dati Demo
+                        <div>
+                          <div className="font-medium text-sm mb-1 group-hover:text-carbon-blue-60 transition-colors">Linea Completa</div>
+                          <div className="text-xs text-carbon-gray-20 opacity-70">Auto, Moto e 3/4 Ruote</div>
+                        </div>
+                        <Network size={16} className="text-carbon-gray-20 group-hover:text-carbon-blue-60 transition-colors" />
                       </button>
                     </div>
                   </div>
                   
-                  <div className="p-6 border border-carbon-gray-20">
-                    <h3 className="text-sm font-bold uppercase tracking-widest mb-2">Info</h3>
+                  <div className="p-6 border-l-2 border-carbon-blue-60 bg-carbon-gray-10">
+                    <h3 className="text-xs font-bold uppercase tracking-widest mb-2 text-carbon-gray-100">Info di Sistema</h3>
                     <p className="text-xs text-carbon-gray-80 leading-relaxed">
-                      L'applicazione supporta lo standard MCTC Net2 per la visualizzazione delle catene metrologiche e dei collegamenti di rete.
+                      L'applicazione supporta lo standard MCTC Net2 per la visualizzazione delle catene metrologiche, dei collegamenti di rete e la generazione di report PDF conformi.
                     </p>
                   </div>
                 </div>
